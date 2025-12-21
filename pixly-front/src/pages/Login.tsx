@@ -3,6 +3,7 @@ import { Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
 import { useState } from "react";
 import { userLogin } from "../api/auth/login";
 import { ErrorMessage } from "../utils/ErrorMessage";
+import logotexugo from "../assets/logotexugo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -70,6 +71,24 @@ const Login = () => {
           },
         }}
       >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mb: 1.5, // espaço abaixo
+            mt: -2, // sobe a logo
+          }}
+        >
+          <Box
+            component="img"
+            src={logotexugo}
+            alt="Logo Texugo"
+            sx={{
+              width: 90,
+              height: "auto",
+            }}
+          />
+        </Box>
         <Typography
           variant="h5"
           sx={{

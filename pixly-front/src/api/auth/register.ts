@@ -1,6 +1,6 @@
 import { api } from "../connection";
 
-export async function regiter(name: string, email: string, password: string) {
+export async function userRegiter(name: string, email: string, password: string) {
   try {
     
     const response = await api.post("api/create", {
