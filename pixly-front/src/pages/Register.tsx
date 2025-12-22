@@ -3,22 +3,29 @@ import { Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
 import { userRegiter } from "../api/auth/register";
 import { useState } from "react";
 import logotexugo from "../assets/logotexugo.png";
+import { ErrorMessage } from "../utils/ErrorMessage";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
+    if (!name || !email || !password) {
+      setError("Preencha todos os campos");
+      return;
+    }
     try {
       const response = await userRegiter(name, email, password);
       console.log(response);
 
       navigate("/home");
     } catch (error) {
-      console.error("Erro no login:", error);
+      console.error("Erro ao criar usuário:", error);
+      setError("Preencha os campos");
     }
   }
   return (
@@ -61,8 +68,8 @@ const Register = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              mb: 1.5, 
-              mt: -2, 
+              mb: 1.5,
+              mt: -2,
             }}
           >
             <Box
@@ -87,11 +94,12 @@ const Register = () => {
           >
             Criar conta
           </Typography>
-
+          <ErrorMessage message={error} />
           <form onSubmit={handleRegister}>
             {" "}
             <TextField
               label="Nome"
+              required
               onChange={(e) => setName(e.target.value)}
               fullWidth
               margin="normal"
@@ -114,6 +122,7 @@ const Register = () => {
             />
             <TextField
               label="E-mail"
+              required
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               fullWidth
@@ -138,6 +147,7 @@ const Register = () => {
             <TextField
               label="Senha"
               type="password"
+              required
               onChange={(e) => setPassword(e.target.value)}
               fullWidth
               margin="normal"
