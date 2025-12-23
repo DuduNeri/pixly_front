@@ -11,17 +11,15 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  async function handleLogin(e: React.FormEvent) {
+   async function handleLogin(e: any) {
     e.preventDefault();
-
     try {
-      const response = await userLogin(email, password);
-      console.log(response);
-
+      await userLogin(email, password);
+      console.log(userLogin)
       navigate("/home");
     } catch (error) {
-      console.error("Erro no login:", error);
-      setError("E-mail ou senha incorretos");
+      console.error("❌ Erro ao logar:", error);
+      setError("email ou senha incorretos")
     }
   }
 
