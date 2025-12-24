@@ -11,15 +11,18 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-   async function handleLogin(e: any) {
+  async function handleLogin(e: any) {
     e.preventDefault();
     try {
-      await userLogin(email, password);
-      console.log(userLogin)
+      const response = await userLogin(email, password);
+      console.log(userLogin);
+      if (!response.data.token) {
+        throw new Error("Login inválido");
+      }
       navigate("/home");
     } catch (error) {
       console.error("❌ Erro ao logar:", error);
-      setError("email ou senha incorretos")
+      setError("email ou senha incorretos");
     }
   }
 
