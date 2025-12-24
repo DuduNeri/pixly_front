@@ -1,13 +1,14 @@
 import { Box } from "@mui/material";
+import Post from "../post/Post";
 
 const Feed = () => {
   return (
     <Box
       sx={{
         width: {
-          xs: "100%", 
-          sm: "100%",   
-          md: "700px",  
+          xs: "100%",
+          sm: "100%",
+          md: "900px",
         },
         mx: "auto",
         minHeight: "100vh",
@@ -21,7 +22,9 @@ const Feed = () => {
         },
         backgroundColor: "#1C1C1C",
       }}
-    />
+    >
+      <Post />
+    </Box>
   );
 };
 

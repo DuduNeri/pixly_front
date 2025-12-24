@@ -15,10 +15,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await userLogin(email, password);
-      console.log(userLogin);
       if (!response.data.token) {
         throw new Error("Login inválido");
       }
+      console.log(response)
       navigate("/home");
     } catch (error) {
       console.error("❌ Erro ao logar:", error);
