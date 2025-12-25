@@ -18,6 +18,7 @@ const Footer = () => {
           xs: "100%",
           md: "850px",
         },
+        
         height: "56px",
         borderTop: "1px solid #2f3336",
         display: "flex",

@@ -7,11 +7,13 @@ const Feed = () => {
       sx={{
         width: {
           xs: "100%",
-          sm: "100%",
-          md: "900px",
+          md: 900,
         },
         mx: "auto",
         minHeight: "100vh",
+
+        backgroundColor: "#1c1c1c",
+
         borderLeft: {
           xs: "none",
           md: "1px solid #2f3336",
@@ -20,7 +22,8 @@ const Feed = () => {
           xs: "none",
           md: "1px solid #2f3336",
         },
-        backgroundColor: "#1C1C1C",
+
+        pb: { xs: 8, md: 0 }, // espaço pro footer no mobile
       }}
     >
       <Post />

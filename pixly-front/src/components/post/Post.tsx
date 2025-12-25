@@ -3,31 +3,70 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ShareIcon from "@mui/icons-material/Share";
 
-const Post = () => {
+const actionStyle = {
+  color: "#71767b",
+  transition: "all .2s ease",
+};
+
+const PostItem = () => {
   return (
     <Box
       sx={{
-        width: "100%",
         px: 2,
-        py: 1.5,
+        py: 2,
         borderBottom: "1px solid #2f3336",
-        transition: "background-color 0.2s",
-        "&:hover": { backgroundColor: "#181818" },
+        transition: "background-color .2s ease",
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "#16181c",
+        },
       }}
     >
       <Box sx={{ display: "flex", gap: 1.5 }}>
         {/* Avatar */}
-        <Avatar sx={{ width: 44, height: 44, bgcolor: "#1d9bf0" }}>
+        <Avatar
+          sx={{
+            width: 42,
+            height: 42,
+            fontSize: 15,
+            fontWeight: 600,
+            background: "linear-gradient(135deg, #1d9bf0, #8b5cf6)",
+            flexShrink: 0,
+          }}
+        >
           E
         </Avatar>
 
         <Box sx={{ flex: 1 }}>
           {/* Header */}
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <Typography sx={{ fontWeight: 600, color: "#e7e9ea" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#e7e9ea",
+                lineHeight: 1.2,
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+            >
               Eduardo
             </Typography>
-            <Typography sx={{ color: "#71767b" }}>
+
+            <Typography
+              sx={{
+                fontSize: 13,
+                color: "#71767b",
+              }}
+            >
               @eduardo · 2h
             </Typography>
           </Box>
@@ -35,66 +74,84 @@ const Post = () => {
           {/* Texto */}
           <Typography
             sx={{
+              mt: 0.75,
+              fontSize: 15,
+              lineHeight: 1.6,
               color: "#e7e9ea",
-              mt: 0.5,
-              lineHeight: 1.4,
+              wordBreak: "break-word",
             }}
           >
             Esse post agora suporta imagem ou vídeo 🎥📸
           </Typography>
 
-          {/* 📸 🎥 Media */}
+          {/* Media */}
           <Box
             sx={{
-              mt: 1,
-              width: "100%",
-              borderRadius: "14px",
+              mt: 1.5,
+              borderRadius: 3,
               overflow: "hidden",
-              backgroundColor: "#000",
               border: "1px solid #2f3336",
+              backgroundColor: "#000",
             }}
           >
-            {/* IMAGEM */}
-            {/* <Box
-              component="img"
-              src="https://source.unsplash.com/random/800x600"
+            <Box
+              component="video"
+              controls
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
               sx={{
                 width: "100%",
-                maxHeight: 500,
+                maxHeight: 480,
+                display: "block",
                 objectFit: "cover",
               }}
-            /> */}
-
-            {/* VÍDEO */}
-            <Box
-            //   component="video"
-            //   controls
-            //   src="https://www.w3schools.com/html/mov_bbb.mp4"
-            //   sx={{
-            //     width: "100%",
-            //     maxHeight: 500,
-            //     backgroundColor: "#000",
-            //   }}
             />
           </Box>
 
-          {/* Ações */}
+          {/* Actions */}
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              maxWidth: 320,
-              mt: 1,
-              color: "#71767b",
+              alignItems: "center",
+              gap: 2.5,
+              mt: 1.25,
             }}
           >
-            <IconButton size="small" sx={{ color: "inherit" }}>
+            <IconButton
+              size="small"
+              sx={{
+                ...actionStyle,
+                "&:hover": {
+                  color: "#1d9bf0",
+                  backgroundColor: "rgba(29,155,240,.12)",
+                },
+              }}
+            >
               <ChatBubbleOutlineIcon fontSize="small" />
             </IconButton>
-            <IconButton size="small" sx={{ color: "inherit" }}>
+
+            <IconButton
+              size="small"
+              sx={{
+                ...actionStyle,
+                "&:hover": {
+                  color: "#f91880",
+                  backgroundColor: "rgba(249,24,128,.12)",
+                },
+              }}
+            >
               <FavoriteBorderIcon fontSize="small" />
             </IconButton>
-            <IconButton size="small" sx={{ color: "inherit" }}>
+
+            <IconButton
+              size="small"
+              sx={{
+                ...actionStyle,
+                "&:hover": {
+                  color: "#00ba7c",
+                  backgroundColor: "rgba(0,186,124,.12)",
+                },
+              }}
+            >
               <ShareIcon fontSize="small" />
             </IconButton>
           </Box>
@@ -104,4 +161,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostItem;
