@@ -1,159 +1,69 @@
 import { Box, Typography, Avatar, IconButton } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import ShareIcon from "@mui/icons-material/Share";
+import {
+  ChatBubbleOutline,
+  FavoriteBorder,
+  MoreHoriz,
+} from "@mui/icons-material";
 
-const actionStyle = {
-  color: "#71767b",
-  transition: "all .2s ease",
-};
-
-const PostItem = () => {
+const Post = () => {
   return (
     <Box
       sx={{
-        px: 2,
-        py: 2,
+        display: "flex",
+        gap: "12px",
+        p: "12px 16px",
         borderBottom: "1px solid #2f3336",
-        transition: "background-color .2s ease",
         cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "#16181c",
-        },
+        transition: "background 0.2s",
+        "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.03)" },
       }}
     >
-      <Box sx={{ display: "flex", gap: 1.5 }}>
-        {/* Avatar */}
-        <Avatar
+      <Avatar
+        sx={{ width: 40, height: 40, mt: 0.5 }}
+        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Texugo"
+      />
+
+      <Box sx={{ flex: 1 }}>
+        {/* Cabeçalho do Post */}
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
+            <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "15px" }}>
+              Texugo Dev
+            </Typography>
+            <Typography sx={{ color: "#71767b", fontSize: "15px" }}>
+              @texugodev · 2h
+            </Typography>
+          </Box>
+          <IconButton size="small" sx={{ color: "#71767b", mt: -1 }}>
+            <MoreHoriz fontSize="small" />
+          </IconButton>
+        </Box>
+
+        {/* Texto do Post */}
+        <Typography sx={{ color: "#e7e9ea", fontSize: "15px", lineHeight: "20px", mt: 0.2, whiteSpace: "pre-wrap" }}>
+          Este é um exemplo de post com o layout refatorado. O espaçamento maior
+          facilita a leitura e deixa a interface muito mais profissional. 🚀
+        </Typography>
+
+        {/* AÇÕES DO POST - Agora alinhadas corretamente */}
+        <Box
           sx={{
-            width: 42,
-            height: 42,
-            fontSize: 15,
-            fontWeight: 600,
-            background: "linear-gradient(135deg, #1d9bf0, #8b5cf6)",
-            flexShrink: 0,
+            display: "flex",
+            gap: "30px",
+            mt: 1.5,
+            maxWidth: "425px", // Limita a largura para não espalhar demais em telas grandes
+            color: "#71767b",
           }}
         >
-          E
-        </Avatar>
-
-        <Box sx={{ flex: 1 }}>
-          {/* Header */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              flexWrap: "wrap",
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: "#e7e9ea",
-                lineHeight: 1.2,
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              Eduardo
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: 13,
-                color: "#71767b",
-              }}
-            >
-              @eduardo · 2h
-            </Typography>
+          {/* Comentários */}
+          <Box sx={{ display: "flex", alignItems: "center", "&:hover": { color: "#1d9bf0", "& .MuiIconButton-root": { bgcolor: "rgba(29, 155, 240, 0.1)" } } }}>
+            <IconButton size="small" color="inherit"><ChatBubbleOutline sx={{ fontSize: "18px" }} /></IconButton>
+            <Typography variant="caption" sx={{ ml: -0.5 }}>12</Typography>
           </Box>
-
-          {/* Texto */}
-          <Typography
-            sx={{
-              mt: 0.75,
-              fontSize: 15,
-              lineHeight: 1.6,
-              color: "#e7e9ea",
-              wordBreak: "break-word",
-            }}
-          >
-            Esse post agora suporta imagem ou vídeo 🎥📸
-          </Typography>
-
-          {/* Media */}
-          <Box
-            sx={{
-              mt: 1.5,
-              borderRadius: 3,
-              overflow: "hidden",
-              border: "1px solid #2f3336",
-              backgroundColor: "#000",
-            }}
-          >
-            <Box
-              component="video"
-              controls
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
-              sx={{
-                width: "100%",
-                maxHeight: 480,
-                display: "block",
-                objectFit: "cover",
-              }}
-            />
-          </Box>
-
-          {/* Actions */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2.5,
-              mt: 1.25,
-            }}
-          >
-            <IconButton
-              size="small"
-              sx={{
-                ...actionStyle,
-                "&:hover": {
-                  color: "#1d9bf0",
-                  backgroundColor: "rgba(29,155,240,.12)",
-                },
-              }}
-            >
-              <ChatBubbleOutlineIcon fontSize="small" />
-            </IconButton>
-
-            <IconButton
-              size="small"
-              sx={{
-                ...actionStyle,
-                "&:hover": {
-                  color: "#f91880",
-                  backgroundColor: "rgba(249,24,128,.12)",
-                },
-              }}
-            >
-              <FavoriteBorderIcon fontSize="small" />
-            </IconButton>
-
-            <IconButton
-              size="small"
-              sx={{
-                ...actionStyle,
-                "&:hover": {
-                  color: "#00ba7c",
-                  backgroundColor: "rgba(0,186,124,.12)",
-                },
-              }}
-            >
-              <ShareIcon fontSize="small" />
-            </IconButton>
+          {/* Likes */}
+          <Box sx={{ display: "flex", alignItems: "center", "&:hover": { color: "#f91880", "& .MuiIconButton-root": { bgcolor: "rgba(249, 24, 128, 0.1)" } } }}>
+            <IconButton size="small" color="inherit"><FavoriteBorder sx={{ fontSize: "18px" }} /></IconButton>
+            <Typography variant="caption" sx={{ ml: -0.5 }}>154</Typography>
           </Box>
         </Box>
       </Box>
@@ -161,4 +71,4 @@ const PostItem = () => {
   );
 };
 
-export default PostItem;
+export default Post;

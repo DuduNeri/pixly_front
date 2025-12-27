@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Box, Paper, Typography, TextField, Button, Link } from "@mui/material";
-import { useState } from "react";
 import { userLogin } from "../api/auth/login";
 import { ErrorMessage } from "../utils/ErrorMessage";
 import logotexugo from "../assets/logotexugo.png";
+
+// Estilo compartilhado para os inputs (idêntico ao Register)
+const textFieldStyle = {
+  "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.6)" },
+  "& .MuiInputLabel-root.Mui-focused": { color: "#fff" },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
+    "&.Mui-focused fieldset": { borderColor: "#fff" },
+  },
+  "& .MuiInputBase-input": { color: "#fff" }
+};
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,20 +22,19 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  async function handleLogin(e: any) {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await userLogin(email, password);
       if (!response.data.token) {
         throw new Error("Login inválido");
       }
-      console.log(response)
       navigate("/home");
-    } catch (error) {
-      console.error("❌ Erro ao logar:", error);
-      setError("email ou senha incorretos");
+    } catch (err) {
+      console.error("❌ Erro ao logar:", err);
+      setError("E-mail ou senha incorretos");
     }
-  }
+  };
 
   return (
     <Box
@@ -34,24 +44,11 @@ const Login = () => {
         alignItems: "center",
         justifyContent: "center",
         px: 2,
-        background: "	#363636",
-        backgroundSize: "600% 600%",
-        animation: "gradientMove 12s ease infinite",
-
-        "@keyframes gradientMove": {
-          "0%": {
-            backgroundPosition: "0% 50%",
-          },
-          "50%": {
-            backgroundPosition: "100% 50%",
-          },
-          "100%": {
-            backgroundPosition: "0% 50%",
-          },
-        },
+        background: "#363636", // Fundo sólido igual ao Register
       }}
     >
       <Paper
+        elevation={0}
         sx={{
           width: "100%",
           maxWidth: 380,
@@ -59,116 +56,58 @@ const Login = () => {
           borderRadius: 3,
           backgroundColor: "#1C1C1C",
           position: "relative",
-
           "&::before": {
             content: '""',
             position: "absolute",
             inset: -1,
             borderRadius: "inherit",
-            background:
-              "linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent)",
-            opacity: 0.6,
+            background: "linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent)",
             zIndex: -1,
           },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mb: 1.5, // espaço abaixo
-            mt: -2, // sobe a logo
-          }}
-        >
-          <Box
-            component="img"
-            src={logotexugo}
-            alt="Logo Texugo"
-            sx={{
-              width: 90,
-              height: "auto",
-            }}
-          />
+        {/* LOGO */}
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 1.5, mt: -2 }}>
+          <Box component="img" src={logotexugo} alt="Logo" sx={{ width: 90 }} />
         </Box>
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            fontWeight: 600,
-            color: "#fff",
-            mb: 1,
-          }}
-        >
+
+        <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 600, color: "#fff", mb: 2 }}>
           Bem-vindo de volta
         </Typography>
+
         <ErrorMessage message={error} />
 
         <form onSubmit={handleLogin}>
-          <TextField
-            label="E-mail"
-            type="email"
-            fullWidth
-            required
-            margin="normal"
-            onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              "& .MuiInputLabel-root": {
-                color: "rgba(255,255,255,0.6)",
-              },
-
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#fff",
-              },
-
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "rgba(255,255,255,0.2)",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#ffffffff",
-                },
-              },
-            }}
+          <TextField 
+            label="E-mail" 
+            type="email" 
+            fullWidth 
+            required 
+            margin="normal" 
+            sx={textFieldStyle} 
+            onChange={(e) => setEmail(e.target.value)} 
           />
-
-          <TextField
-            label="Senha"
-            type="password"
-            fullWidth
-            required
-            margin="normal"
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              "& .MuiInputLabel-root": {
-                color: "rgba(255,255,255,0.6)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#fff",
-              },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "rgba(255,255,255,0.2)",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#ffffffff",
-                },
-              },
-            }}
+          <TextField 
+            label="Senha" 
+            type="password" 
+            fullWidth 
+            required 
+            margin="normal" 
+            sx={textFieldStyle} 
+            onChange={(e) => setPassword(e.target.value)} 
           />
-
+          
           <Button
-            type="submit"
             fullWidth
+            type="submit"
+            variant="contained"
             sx={{
               mt: 3,
-              py: 1.1,
-              borderRadius: 2,
+              py: 1.2,
+              backgroundColor: "#333",
               fontWeight: 600,
-              color: "	#ffffffff",
               textTransform: "none",
-              "&:hover": {
-                backgroundColor: "	#5f5f5fff",
-              },
+              "&:hover": { backgroundColor: "#5f5f5f" },
             }}
           >
             Entrar
@@ -185,9 +124,7 @@ const Login = () => {
             fontSize: "0.9rem",
             color: "rgba(255,255,255,0.6)",
             textDecoration: "none",
-            "&:hover": {
-              color: "#ffffffff",
-            },
+            "&:hover": { color: "#fff" },
           }}
         >
           Criar uma conta

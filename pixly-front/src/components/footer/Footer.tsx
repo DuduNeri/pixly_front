@@ -1,68 +1,88 @@
 import { Box, IconButton } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from "@mui/icons-material/Search";
-import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { 
+  Home as HomeIcon, 
+  Search as SearchIcon, 
+  Person as PersonIcon, 
+  Add as AddIcon 
+} from "@mui/icons-material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Footer = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <Box
+      component="nav"
       sx={{
         position: "fixed",
         bottom: 0,
         left: "50%",
         transform: "translateX(-50%)",
-        width: {
-          xs: "100%",
-          md: "850px",
-        },
+        width: "100%",
+        // Alinhado com os 600px do feed estilo Twitter
+        maxWidth: { xs: "100%", md: 600 }, 
         
-        height: "56px",
+        height: "53px", // Altura padrão do Twitter mobile
+        backgroundColor: "rgba(0, 0, 0, 0.85)", // Preto com transparência
+        backdropFilter: "blur(12px)", 
         borderTop: "1px solid #2f3336",
+        
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
         zIndex: 1000,
-        borderRadius: "20px 20px 0 0",
       }}
     >
       <IconButton
-        onClick={() => Navigate("/home")}
+        onClick={() => navigate("/home")}
         sx={{
-          color: "#e7e9ea",
-          "&:hover": { color: "#1d9bf0" },
+          color: isActive("/home") ? "#fff" : "#71767b",
+          "&:hover": { color: "#fff" },
         }}
       >
-        <HomeIcon fontSize="medium" />
+        <HomeIcon sx={{ fontSize: "28px" }} />
       </IconButton>
-       <IconButton
-        onClick={() => Navigate("/seacrch")}
-        sx={{
-          color: "#e7e9ea",
-          "&:hover": { color: "#1d9bf0" },
-        }}
-      >
-        <SearchIcon fontSize="medium" />
-      </IconButton>
+
       <IconButton
-        onClick={() => Navigate("/Post")}
+        onClick={() => navigate("/search")}
         sx={{
-          color: "#e7e9ea",
-          "&:hover": { color: "#1d9bf0" },
+          color: isActive("/search") ? "#fff" : "#71767b",
+          "&:hover": { color: "#fff" },
         }}
       >
-        <AddIcon fontSize="medium" />
+        <SearchIcon sx={{ fontSize: "28px" }} />
       </IconButton>
-       <IconButton
-        onClick={() => Navigate("/Profile")}
+
+      {/* Botão de Postar - Mais parecido com o FAB do Twitter */}
+      <IconButton
+        onClick={() => navigate("/post")}
         sx={{
-          color: "#e7e9ea",
-          "&:hover": { color: "#1d9bf0" },
+          color: "#fff",
+          backgroundColor: "#71767b",
+          width: "42px",
+          height: "42px",
+          mb: 0.5, // Leve ajuste para centralizar visualmente
+          "&:hover": { 
+            backgroundColor: "#3b3b3bff",
+          },
+          transition: "0.2s",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
         }}
       >
-        <PersonIcon fontSize="medium" />
+        <AddIcon sx={{ fontSize: "24px" }} />
+      </IconButton>
+
+      <IconButton
+        onClick={() => navigate("/profile")}
+        sx={{
+          color: isActive("/profile") ? "#fff" : "#71767b",
+          "&:hover": { color: "#fff" },
+        }}
+      >
+        <PersonIcon sx={{ fontSize: "28px" }} />
       </IconButton>
     </Box>
   );
