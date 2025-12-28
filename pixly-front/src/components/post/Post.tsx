@@ -25,9 +25,17 @@ const Post = () => {
 
       <Box sx={{ flex: 1 }}>
         {/* Cabeçalho do Post */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
           <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
-            <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "15px" }}>
+            <Typography
+              sx={{ color: "#fff", fontWeight: 700, fontSize: "15px" }}
+            >
               Texugo Dev
             </Typography>
             <Typography sx={{ color: "#71767b", fontSize: "15px" }}>
@@ -40,7 +48,15 @@ const Post = () => {
         </Box>
 
         {/* Texto do Post */}
-        <Typography sx={{ color: "#e7e9ea", fontSize: "15px", lineHeight: "20px", mt: 0.2, whiteSpace: "pre-wrap" }}>
+        <Typography
+          sx={{
+            color: "#e7e9ea",
+            fontSize: "15px",
+            lineHeight: "20px",
+            mt: 0.2,
+            whiteSpace: "pre-wrap",
+          }}
+        >
           Este é um exemplo de post com o layout refatorado. O espaçamento maior
           facilita a leitura e deixa a interface muito mais profissional. 🚀
         </Typography>
@@ -51,19 +67,45 @@ const Post = () => {
             display: "flex",
             gap: "30px",
             mt: 1.5,
-            maxWidth: "425px", // Limita a largura para não espalhar demais em telas grandes
+            maxWidth: "425px",
             color: "#71767b",
           }}
         >
           {/* Comentários */}
-          <Box sx={{ display: "flex", alignItems: "center", "&:hover": { color: "#1d9bf0", "& .MuiIconButton-root": { bgcolor: "rgba(29, 155, 240, 0.1)" } } }}>
-            <IconButton size="small" color="inherit"><ChatBubbleOutline sx={{ fontSize: "18px" }} /></IconButton>
-            <Typography variant="caption" sx={{ ml: -0.5 }}>12</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              "&:hover": {
+                color: "#1d9bf0",
+                "& .MuiIconButton-root": { bgcolor: "rgba(29, 155, 240, 0.1)" },
+              },
+            }}
+          >
+            <IconButton size="small" color="inherit">
+              <ChatBubbleOutline sx={{ fontSize: "18px" }} />
+            </IconButton>
+            <Typography variant="caption" sx={{ ml: -0.5 }}>
+              12
+            </Typography>
           </Box>
           {/* Likes */}
-          <Box sx={{ display: "flex", alignItems: "center", "&:hover": { color: "#f91880", "& .MuiIconButton-root": { bgcolor: "rgba(249, 24, 128, 0.1)" } } }}>
-            <IconButton size="small" color="inherit"><FavoriteBorder sx={{ fontSize: "18px" }} /></IconButton>
-            <Typography variant="caption" sx={{ ml: -0.5 }}>154</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              "&:hover": {
+                color: "#f91880",
+                "& .MuiIconButton-root": { bgcolor: "rgba(249, 24, 128, 0.1)" },
+              },
+            }}
+          >
+            <IconButton size="small" color="inherit">
+              <FavoriteBorder sx={{ fontSize: "18px" }} />
+            </IconButton>
+            <Typography variant="caption" sx={{ ml: -0.5 }}>
+              154
+            </Typography>
           </Box>
         </Box>
       </Box>

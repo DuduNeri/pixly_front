@@ -5,7 +5,7 @@ import { userRegiter } from "../api/auth/register";
 import { ErrorMessage } from "../utils/ErrorMessage";
 import logotexugo from "../assets/logotexugo.png";
 
-// Estilo compartilhado para os inputs escuros
+
 const textFieldStyle = {
   "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.6)" },
   "& .MuiInputLabel-root.Mui-focused": { color: "#fff" },

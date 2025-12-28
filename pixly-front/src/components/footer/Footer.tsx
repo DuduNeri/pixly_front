@@ -22,11 +22,10 @@ const Footer = () => {
         left: "50%",
         transform: "translateX(-50%)",
         width: "100%",
-        // Alinhado com os 600px do feed estilo Twitter
         maxWidth: { xs: "100%", md: 600 }, 
         
-        height: "53px", // Altura padrão do Twitter mobile
-        backgroundColor: "rgba(0, 0, 0, 0.85)", // Preto com transparência
+        height: "53px", 
+        backgroundColor: "rgba(0, 0, 0, 0.85)", 
         backdropFilter: "blur(12px)", 
         borderTop: "1px solid #2f3336",
         
@@ -64,7 +63,7 @@ const Footer = () => {
           backgroundColor: "#71767b",
           width: "42px",
           height: "42px",
-          mb: 0.5, // Leve ajuste para centralizar visualmente
+          mb: 0.5, 
           "&:hover": { 
             backgroundColor: "#3b3b3bff",
           },
