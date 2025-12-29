@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, Button } from "@mui/material";
+import { Box, Typography, Avatar } from "@mui/material";
 import Footer from "../components/footer/Footer";
 
 const Profile = () => {
@@ -22,7 +22,7 @@ const Profile = () => {
           md: "1px solid #2f3336",
         },
 
-        pb: { xs: 8, md: 0 }, // espaço pro footer no mobile
+        pb: { xs: 8, md: 0 }, 
       }}
     >
       {/* Cover */}
@@ -77,13 +77,6 @@ const Profile = () => {
             Desenvolvedor Full Stack • Node.js • React • TypeScript 🚀
           </Typography>
         </Box>
-
-        {/* Stats */}
-        <Box sx={{ display: "flex", gap: 3, mt: 2 }}>
-          <Typography sx={{ fontSize: 14 }}>
-            <strong>42</strong> <span style={{ color: "#71767b" }}>Posts</span>
-          </Typography>
-        </Box>
       </Box>
 
       {/* Tabs fake */}
@@ -114,7 +107,7 @@ const Profile = () => {
 
       {/* User Posts */}
       <Box>
-        {[1, 2, 3].map((post) => (
+        {[1].map((post) => (
           <Box
             key={post}
             sx={{
