@@ -4,8 +4,13 @@ import {
   FavoriteBorder,
   MoreHoriz,
 } from "@mui/icons-material";
+import { getPosts } from "../../api/post/posts";
+import { useState, useEffect } from "react";
 
 const Post = () => {
+  const [getPost, setPosts] = useState("");
+
+  
   return (
     <Box
       sx={{
