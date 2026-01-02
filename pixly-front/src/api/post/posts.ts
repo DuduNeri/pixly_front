@@ -1,5 +1,5 @@
 import { api } from "../connection";
-import type { Post } from "../types/post";
+import type { Post } from "../types/Post";
 
 export async function getPosts(): Promise<Post[]> {
   try {

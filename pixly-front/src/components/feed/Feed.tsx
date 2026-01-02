@@ -1,7 +1,17 @@
-import { Box, Typography} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Post from "../post/Post";
+import { getPosts } from "../../api/post/posts";
+import { useState, useEffect } from "react";
 
 const Feed = () => {
+  const fetchPosts = async () => {
+    try {
+      const data = await getPosts();
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
   return (
     <Box
       component="main"
@@ -9,7 +19,7 @@ const Feed = () => {
         width: { xs: "100%", md: 1000 },
         mx: "auto",
         minHeight: "100vh",
-        backgroundColor: "#000000", 
+        backgroundColor: "#000000",
         borderLeft: "1px solid #2f3336",
         borderRight: "1px solid #2f3336",
         pb: { xs: 9, md: 2 },
@@ -27,22 +37,22 @@ const Feed = () => {
         }}
       >
         <Typography
-          variant="h4" 
+          variant="h4"
           sx={{
             px: 2,
-            py: 1, 
+            py: 1,
             fontWeight: 900,
             fontStyle: "italic",
             color: "#fff",
-            fontSize: "1.8rem", 
-            letterSpacing: "-1.5px", 
+            fontSize: "1.8rem",
+            letterSpacing: "-1.5px",
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
             textShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             "& span": {
               color: "#1d9bf0",
-              fontWeight: 500, 
+              fontWeight: 500,
               ml: "1px",
             },
             "&:hover": {
