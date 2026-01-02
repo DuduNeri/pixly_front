@@ -12,7 +12,7 @@ const textFieldStyle = {
     "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
     "&.Mui-focused fieldset": { borderColor: "#fff" },
   },
-  "& .MuiInputBase-input": { color: "#fff" }
+  "& .MuiInputBase-input": { color: "#fff" },
 };
 
 const Login = () => {
@@ -60,42 +60,48 @@ const Login = () => {
             position: "absolute",
             inset: -1,
             borderRadius: "inherit",
-            background: "linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent)",
+            background:
+              "linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent)",
             zIndex: -1,
           },
         }}
       >
         {/* LOGO */}
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 1.5, mt: -2 }}>
+        <Box
+          sx={{ display: "flex", justifyContent: "center", mb: 1.5, mt: -2 }}
+        >
           <Box component="img" src={logotexugo} alt="Logo" sx={{ width: 90 }} />
         </Box>
 
-        <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 600, color: "#fff", mb: 2 }}>
+        <Typography
+          variant="h5"
+          sx={{ textAlign: "center", fontWeight: 600, color: "#fff", mb: 2 }}
+        >
           Bem-vindo de volta
         </Typography>
 
         <ErrorMessage message={error} />
 
         <form onSubmit={handleLogin}>
-          <TextField 
-            label="E-mail" 
-            type="email" 
-            fullWidth 
-            required 
-            margin="normal" 
-            sx={textFieldStyle} 
-            onChange={(e) => setEmail(e.target.value)} 
+          <TextField
+            label="E-mail"
+            type="email"
+            fullWidth
+            required
+            margin="normal"
+            sx={textFieldStyle}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField 
-            label="Senha" 
-            type="password" 
-            fullWidth 
-            required 
-            margin="normal" 
-            sx={textFieldStyle} 
-            onChange={(e) => setPassword(e.target.value)} 
+          <TextField
+            label="Senha"
+            type="password"
+            fullWidth
+            required
+            margin="normal"
+            sx={textFieldStyle}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          
+
           <Button
             fullWidth
             type="submit"

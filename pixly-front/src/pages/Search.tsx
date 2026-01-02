@@ -29,7 +29,7 @@ const Search = () => {
           md: "1px solid #2f3336",
         },
 
-        pb: { xs: 8, md: 0 }, // espaço pro footer no mobile
+        pb: { xs: 8, md: 0 }, 
       }}
     >
       {/* Header Search */}

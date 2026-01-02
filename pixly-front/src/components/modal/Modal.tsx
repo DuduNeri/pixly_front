@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   IconButton,
-  Avatar,
   TextField,
   Button,
 } from "@mui/material";
@@ -69,23 +68,6 @@ const PostModal = ({ open, onClose }: PostModalProps) => {
             Criar publicação
           </Typography>
         </Box>
-
-        {/* User */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-            px: 2,
-            py: 1.5,
-          }}
-        >
-          <Avatar src="https://i.pravatar.cc/150" />
-          <Typography variant="body2" fontWeight={600}>
-            eduardo.dev
-          </Typography>
-        </Box>
-
         {/* Image Upload */}
         <Box
           component="label"

@@ -12,7 +12,6 @@ import PostModal from "../modal/Modal";
 const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
@@ -27,18 +26,27 @@ const Footer = () => {
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
-          maxWidth: { xs: "100%", md: 600 },
+          maxWidth: { xs: "100%", md: 1000 },
           height: 56,
           bgcolor: "rgba(0,0,0,0.85)",
           backdropFilter: "blur(12px)",
-          borderTop: "1px solid",
-          borderColor: "#2f3336",
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
           zIndex: 1200,
         }}
       >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "50%",
+            borderTop: "1px solid #2f3336",
+          }}
+        />
+
         {/* Home */}
         <IconButton
           onClick={() => navigate("/home")}
@@ -48,7 +56,7 @@ const Footer = () => {
             "&:hover": { color: "#fff" },
           }}
         >
-          <HomeIcon fontSize="medium" />
+          <HomeIcon />
         </IconButton>
 
         {/* Search */}
@@ -60,7 +68,7 @@ const Footer = () => {
             "&:hover": { color: "#fff" },
           }}
         >
-          <SearchIcon fontSize="medium" />
+          <SearchIcon />
         </IconButton>
 
         {/* Add Post */}
@@ -74,9 +82,7 @@ const Footer = () => {
             mb: 0.5,
             boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
             transition: "0.2s",
-            "&:hover": {
-              bgcolor: "#3b3b3b",
-            },
+            "&:hover": { bgcolor: "#3b3b3b" },
           }}
         >
           <AddIcon />
@@ -91,11 +97,10 @@ const Footer = () => {
             "&:hover": { color: "#fff" },
           }}
         >
-          <PersonIcon fontSize="medium" />
+          <PersonIcon />
         </IconButton>
       </Box>
 
-      {/* Modal */}
       <PostModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );

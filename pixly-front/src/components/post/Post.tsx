@@ -1,12 +1,42 @@
+import { useEffect, useState } from "react";
 import { Box, Typography, Avatar, IconButton } from "@mui/material";
 import {
   ChatBubbleOutline,
   FavoriteBorder,
   MoreHoriz,
 } from "@mui/icons-material";
+import { getUserById } from "../../api/user/user";
 
-const Post = () => {
-  
+interface PostType {
+  id: string;
+  title: string;
+  contentText: string;
+  contentImage?: string | null;
+  userId: string;
+  createdAt: string;
+}
+
+interface PostProps {
+  post: PostType;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email?: string;
+}
+
+const Post = ({ post }: PostProps) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (!post.userId) return;
+
+    getUserById(post.userId)
+      .then((data: User) => setUser(data))
+      .catch(() => setUser(null));
+  }, [post.userId]);
+
   return (
     <Box
       sx={{
@@ -19,13 +49,11 @@ const Post = () => {
         "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.03)" },
       }}
     >
-      <Avatar
-        sx={{ width: 40, height: 40, mt: 0.5 }}
-        src="https://api.dicebear.com/7.x/avataaars/svg?seed=Texugo"
-      />
+      {/* Avatar */}
+      <Avatar />
 
       <Box sx={{ flex: 1 }}>
-        {/* Cabeçalho do Post */}
+        {/* Cabeçalho */}
         <Box
           sx={{
             display: "flex",
@@ -35,20 +63,32 @@ const Post = () => {
         >
           <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
             <Typography
-              sx={{ color: "#fff", fontWeight: 700, fontSize: "15px" }}
+              sx={{ color: "#fff", fontWeight: 700, fontSize: "16px" }}
             >
-              Texugo Dev
+              {user?.name ?? "Usuário"}
             </Typography>
+            <Typography
+              sx={{
+                color: "#71767b",
+                fontSize: "13px",
+                fontWeight: 400,
+                ml: 0.5,
+              }}
+            >
+              @{user?.email?.split("@")[0] ?? "usuario"}
+            </Typography>
+
             <Typography sx={{ color: "#71767b", fontSize: "15px" }}>
-              @texugodev · 2h
+              · {new Date(post.createdAt).toLocaleDateString()}
             </Typography>
           </Box>
+
           <IconButton size="small" sx={{ color: "#71767b", mt: -1 }}>
             <MoreHoriz fontSize="small" />
           </IconButton>
         </Box>
 
-        {/* Texto do Post */}
+        {/* Texto */}
         <Typography
           sx={{
             color: "#e7e9ea",
@@ -58,11 +98,10 @@ const Post = () => {
             whiteSpace: "pre-wrap",
           }}
         >
-          Este é um exemplo de post com o layout refatorado. O espaçamento maior
-          facilita a leitura e deixa a interface muito mais profissional. 🚀
+          {post.contentText}
         </Typography>
 
-        {/* AÇÕES DO POST - Agora alinhadas corretamente */}
+        {/* Ações */}
         <Box
           sx={{
             display: "flex",
@@ -79,7 +118,9 @@ const Post = () => {
               alignItems: "center",
               "&:hover": {
                 color: "#1d9bf0",
-                "& .MuiIconButton-root": { bgcolor: "rgba(29, 155, 240, 0.1)" },
+                "& .MuiIconButton-root": {
+                  bgcolor: "rgba(29, 155, 240, 0.1)",
+                },
               },
             }}
           >
@@ -87,9 +128,10 @@ const Post = () => {
               <ChatBubbleOutline sx={{ fontSize: "18px" }} />
             </IconButton>
             <Typography variant="caption" sx={{ ml: -0.5 }}>
-              12
+              0
             </Typography>
           </Box>
+
           {/* Likes */}
           <Box
             sx={{
@@ -97,7 +139,9 @@ const Post = () => {
               alignItems: "center",
               "&:hover": {
                 color: "#f91880",
-                "& .MuiIconButton-root": { bgcolor: "rgba(249, 24, 128, 0.1)" },
+                "& .MuiIconButton-root": {
+                  bgcolor: "rgba(249, 24, 128, 0.1)",
+                },
               },
             }}
           >
@@ -105,7 +149,7 @@ const Post = () => {
               <FavoriteBorder sx={{ fontSize: "18px" }} />
             </IconButton>
             <Typography variant="caption" sx={{ ml: -0.5 }}>
-              154
+              0
             </Typography>
           </Box>
         </Box>

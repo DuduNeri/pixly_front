@@ -3,15 +3,29 @@ import Post from "../post/Post";
 import { getPosts } from "../../api/post/posts";
 import { useState, useEffect } from "react";
 
+interface PostType {
+  id: string;
+  title: string;
+  contentText: string;
+  contentImage?: string | null;
+  userId: string;
+  createdAt: string;
+}
+
 const Feed = () => {
-  const fetchPosts = async () => {
-    try {
-      const data = await getPosts();
-      return data;
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  const [posts, setPosts] = useState<PostType[]>([]);
+
+  useEffect(() => {
+    const fectchPosts = async () => {
+      try {
+        const data: PostType[] = await getPosts();
+        setPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fectchPosts();
+  }, []);
   return (
     <Box
       component="main"
@@ -65,11 +79,10 @@ const Feed = () => {
       </Box>
 
       {/* Lista de Posts */}
-      <Box>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+      <Box component="main">
+        {posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
       </Box>
     </Box>
   );
