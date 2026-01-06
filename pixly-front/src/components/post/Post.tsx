@@ -27,15 +27,19 @@ interface User {
 }
 
 const Post = ({ post }: PostProps) => {
+  const { contentText, contentImage, userId, createdAt } = post;
+
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    if (!post.userId) return;
+    if (!userId) return;
 
-    getUserById(post.userId)
-      .then((data: User) => setUser(data))
+    getUserById(userId)
+      .then(setUser)
       .catch(() => setUser(null));
-  }, [post.userId]);
+  }, [userId]);
+
+  const username = user?.email?.split("@")[0] ?? "usuario";
 
   return (
     <Box
@@ -67,6 +71,7 @@ const Post = ({ post }: PostProps) => {
             >
               {user?.name ?? "Usuário"}
             </Typography>
+
             <Typography
               sx={{
                 color: "#71767b",
@@ -75,11 +80,11 @@ const Post = ({ post }: PostProps) => {
                 ml: 0.5,
               }}
             >
-              @{user?.email?.split("@")[0] ?? "usuario"}
+              @{username}
             </Typography>
 
             <Typography sx={{ color: "#71767b", fontSize: "15px" }}>
-              · {new Date(post.createdAt).toLocaleDateString()}
+              · {new Date(createdAt).toLocaleDateString()}
             </Typography>
           </Box>
 
@@ -98,8 +103,19 @@ const Post = ({ post }: PostProps) => {
             whiteSpace: "pre-wrap",
           }}
         >
-          {post.contentText}
+          {contentText}
         </Typography>
+
+        {/* Imagem do post */}
+        {contentImage && (
+          <div className="mt-3 overflow-hidden rounded-xl">
+            <img
+              src={`http://localhost:3333${contentImage}`}
+              alt="Imagem do post"
+              className="w-full object-cover"
+            />
+          </div>
+        )}
 
         {/* Ações */}
         <Box

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { X, ImagePlus } from "lucide-react";
 import { useState } from "react";
+import { CreatePost } from "../../api/post/create.post";
 
 interface PostModalProps {
   open: boolean;
@@ -15,12 +16,23 @@ interface PostModalProps {
 }
 
 const PostModal = ({ open, onClose }: PostModalProps) => {
+  const [contentText, setContentText] = useState("");
   const [image, setImage] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setImage(URL.createObjectURL(file));
+    }
+  };
+  const handlePost = async () => {
+    try {
+      await CreatePost("Post", contentText, image ?? undefined);
+      onClose();
+      setContentText("");
+      setImage(null);
+    } catch (error) {
+      console.error("Erro ao criar post:", error);
     }
   };
 
@@ -111,11 +123,14 @@ const PostModal = ({ open, onClose }: PostModalProps) => {
             rows={3}
             placeholder="Escreva uma legenda..."
             variant="standard"
+            value={contentText}
+            onChange={(e) => setContentText(e.target.value)}
             InputProps={{
               disableUnderline: true,
               sx: { fontSize: 14 },
             }}
           />
+
           <Box
             sx={{
               display: "flex",
@@ -124,6 +139,7 @@ const PostModal = ({ open, onClose }: PostModalProps) => {
           >
             <Button
               size="small"
+              onClick={handlePost}
               sx={{
                 ml: "auto",
                 fontWeight: 600,
