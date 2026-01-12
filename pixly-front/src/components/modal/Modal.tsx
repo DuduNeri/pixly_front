@@ -121,7 +121,6 @@ const PostModal = ({ open, onClose }: PostModalProps) => {
             fullWidth
             multiline
             rows={3}
-            placeholder="Escreva uma legenda..."
             variant="standard"
             value={contentText}
             onChange={(e) => setContentText(e.target.value)}
